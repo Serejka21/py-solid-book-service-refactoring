@@ -4,6 +4,7 @@ from app.book import Book
 
 
 class DisplayBook(ABC):
+
     @abstractmethod
     def display(self) -> None:
         pass

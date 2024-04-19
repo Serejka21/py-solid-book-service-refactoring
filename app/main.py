@@ -18,12 +18,17 @@ data = {
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
     for cmd, method_type in commands:
-        if cmd == "display":
-            data.get("display").get(method_type)(book).display()
-        elif cmd == "print":
-            data.get("print").get(method_type)(book).print_book()
-        elif cmd == "serialize":
-            return data.get("serialize").get(method_type)(book).serialize()
+        try:
+            if cmd == "display":
+                data.get("display").get(method_type)(book).display()
+            elif cmd == "print":
+                data.get("print").get(method_type)(book).print_book()
+            elif cmd == "serialize":
+                return data.get("serialize").get(method_type)(book).serialize()
+            else:
+                raise ValueError(f"Unknown command {cmd}")
+        except KeyError:
+            raise ValueError(f"Unknown method {method_type}")
 
 
 if __name__ == "__main__":
